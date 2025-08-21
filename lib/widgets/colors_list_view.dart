@@ -29,25 +29,25 @@ class ColorsListView extends StatefulWidget {
 
 class _ColorsListViewState extends State<ColorsListView> {
   int currIndex = 0;
-  List<Color> colors = const [kSecondaryColor, Color(0xffAC3931)];
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 40,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: colors.length,
+        itemCount: kColors.length,
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.only(right: 8.0),
             child: GestureDetector(
               onTap: () {
                 currIndex = index;
-                BlocProvider.of<AddNoteCubit>(context).color = colors[index];
+                BlocProvider.of<AddNoteCubit>(context).color = kColors[index];
                 setState(() {});
               },
               child: ColorItem(
-                color: colors[index],
+                color: kColors[index],
                 isActive: currIndex == index,
               ),
             ),
