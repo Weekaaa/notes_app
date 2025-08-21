@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app/constants.dart';
+import 'package:notes_app/models/note_model.dart';
 import 'package:notes_app/views/edit_note_view.dart';
 
 class NoteItem extends StatelessWidget {
-  const NoteItem({super.key, required this.color});
-  final Color color;
+  const NoteItem({super.key, required this.note});
+  final NoteModel note;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class NoteItem extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: color,
+          color: Color(note.color),
           borderRadius: BorderRadius.circular(16),
         ),
         child: Column(
@@ -31,13 +32,13 @@ class NoteItem extends StatelessWidget {
               padding: const EdgeInsets.only(top: 24, bottom: 24, left: 16),
               child: ListTile(
                 title: Text(
-                  'Flutter Notes',
+                  note.title,
                   style: TextStyle(color: kPrimaryColor, fontSize: 28),
                 ),
                 subtitle: Padding(
                   padding: const EdgeInsets.only(top: 16),
                   child: Text(
-                    'You need to remember what cubit is and does.',
+                    note.subtitle,
                     style: TextStyle(
                       color: kPrimaryColor.withAlpha(200),
                       fontSize: 18,
@@ -45,7 +46,9 @@ class NoteItem extends StatelessWidget {
                   ),
                 ),
                 trailing: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    note.delete();
+                  },
                   icon: Icon(Icons.delete, color: kPrimaryColor, size: 34),
                 ),
               ),
@@ -53,7 +56,7 @@ class NoteItem extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(right: 28, bottom: 24),
               child: Text(
-                'August 21, 2025',
+                note.date,
                 style: TextStyle(
                   fontSize: 18,
                   color: kPrimaryColor.withAlpha(200),
